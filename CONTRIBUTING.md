@@ -1,7 +1,7 @@
 Contributing
 
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with
-the owners of this repository before making a change.
+the owner of this repository before making a change.
 
 Please note we have a code of conduct, please follow it in all your interactions with the project.
 
@@ -14,6 +14,7 @@ that this Pull Request would represent. The versioning scheme we use is SemVer. 
 sign-off of two other developers, or if you do not have permission to do that, you may request the second reviewer to merge it for you.
 
 Code of Conduct
+
 Our Pledge
 
 In the interest of fostering an open and welcoming environment, we as contributors and maintainers pledge to making participation
