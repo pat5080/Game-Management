@@ -1,4 +1,4 @@
-namespace GameManagement.Data
+namespace NodeEleven.Data
 {
     public class WeatherForecast
     {
