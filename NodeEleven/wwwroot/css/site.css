@@ -8,7 +8,7 @@ h1:focus {
 }
 
 a, .btn-link {
-    color: #0071c1;
+    text-decoration: none;
 }
 
 .btn-primary {
@@ -88,15 +88,33 @@ footer{
     margin: 0 auto;
 }
 
+nav{
+    position: absolute;
+    top: 15%;
+    left: 15%;
+}
+
 .nav-drop{
     background: black;
-    margin: 70px 100px;
-    width: 100px;
+    width: 90px;
+    height: 50px;
     text-align: center;
     padding: 5px;
+    border-radius: 20px;
 }
 
 .nav-drop h1{
     color: white;
-    padding: 0px;
+    vertical-align: middle;
+    line-height: 50px;
+    margin: auto;
+}
+
+#home-heading {
+    position: absolute;
+    width: 30%;
+    height: 110px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
