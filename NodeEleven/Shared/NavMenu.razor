@@ -1,6 +1,9 @@
-﻿<nav>
+﻿@inject NavigationManager MyNavigationManager
+
+<nav>
     <div class="nav-drop">
-            <h1>About</h1>
+            <NavLink href="/"><h1>Home</h1></NavLink>
+            <NavLink href="/about"><h1>About</h1></NavLink>
     </div>
 </nav>
 
