@@ -26,10 +26,7 @@ a, .btn-link {
 .content h1 {
     text-align: center;
     font-size: 50px;
-}
-
-.content p {
-    text-align: center;
+    margin: 30px;
 }
 
 .valid.modified:not([type=checkbox]) {
@@ -90,12 +87,13 @@ footer {
     color: white;
     background: black;
     margin-top: 15px;
+    font-size: 18px;
 }
 
 nav{
     position: absolute;
-    top: 10%;
-    left: 10%;
+    top: 5%;
+    left: 5%;
 }
 
 .nav-drop{
@@ -112,12 +110,14 @@ nav{
     vertical-align: middle;
     line-height: 50px;
     margin: auto;
+    font-family: "system-ui";
 }
 
 #home-heading {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    font-family: "system-ui";
 }
 
 #home-heading h1{
@@ -127,6 +127,7 @@ nav{
 #home-heading p{
     color: white;
     font-size: 20px;
+    margin: 0px auto;
 }
 
 .page-heading{
@@ -135,13 +136,14 @@ nav{
 
 .page-text{
     color: white;
+    margin: 20px auto;
+    text-align: left;
+    width: 60%;
+    font-size: 18px;
 }
 
 #about-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    font-family: "system-ui";
 }
 
 #node-video {
@@ -156,4 +158,38 @@ nav{
     width: 100vw;
     height: 70vh;
     margin: 0px;
+}
+
+#connect {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: white;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+    #connect h1 {
+        font-size: 14px;
+    }
+
+/* Media queries*/
+
+@media (max-width: 1000px) {
+
+    nav {
+        position: relative;
+        top: unset;
+        left: unset;
+        margin-top: 25px;
+    }
+
+    .nav-drop {
+        margin: 0px auto;
+    }
+
 }
