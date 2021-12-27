@@ -1,9 +1,27 @@
 ﻿@page "/panel"
 
+@using NodeEleven.Models.SteamModel;
+@using NodeEleven.Services.Steam;
+@using System.Net.Http;
+
+@inject SteamService Steam
+
 <PageTitle>Panel</PageTitle>
+
+    @if(news == null)
+    {
+    <p class="panel-txt">Loading panel...</p>
+    }
+    else
+    {
+        <p class="panel-txt">@news.newsitems[0].appid</p>
+    }
 
 <h3>Panel</h3>
 
 @code {
+    private NodeEleven.Models.SteamModel.appnews news;
+
+    protected override async Task OnInitializedAsync() => news = await Steam.GetPostsAsync();
 
 }

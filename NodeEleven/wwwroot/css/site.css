@@ -177,6 +177,10 @@ nav{
         font-size: 14px;
     }
 
+    .panel-txt {
+        color: white;
+    }
+
 /* Media queries*/
 
 @media (max-width: 1000px) {
