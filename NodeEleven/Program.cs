@@ -1,22 +1,22 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using NodeEleven.Services.Steam;
+using Microsoft.Extensions.Configuration;
+/* using NodeEleven.Services.Steam; */
 
 var builder = WebApplication.CreateBuilder(args);
 
+ConfigurationManager configuration = builder.Configuration;
+
 // Add services to the container.
+
+string uri = configuration.GetValue<string>("SteamAPI");
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddHttpClient();
-builder.Services.AddScoped<SteamService>();
-
-builder.Services.AddSingleton<SteamService>(new SteamCached(
-    new HttpClient
-    {
-        BaseAddress = new Uri(SteamSettings.RestApiLocation)
-    }
-    ));
-//builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddHttpClient("steam", c =>
+{
+    c.BaseAddress = new Uri(uri);
+});
 
 var app = builder.Build();
 

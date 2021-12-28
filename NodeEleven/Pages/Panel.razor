@@ -1,12 +1,16 @@
 ﻿@page "/panel"
 
 @using NodeEleven.Models.SteamModel;
-@using NodeEleven.Services.Steam;
+@* @using NodeEleven.Services.Steam; *@
 @using System.Net.Http;
 
-@inject SteamService Steam
+@inject IHttpClientFactory _clientFactory
+
+@* @inject SteamService Steam *@
 
 <PageTitle>Panel</PageTitle>
+
+    @*
 
     @if(news == null)
     {
@@ -17,11 +21,60 @@
         <p class="panel-txt">@news.newsitems[0].appid</p>
     }
 
+    *@
+
 <h3>Panel</h3>
 
-@code {
-    private NodeEleven.Models.SteamModel.appnews news;
+@if (string.IsNullOrWhiteSpace(errorString) == false)
+{
+    <div class="panel-txt">@errorString</div>
+}
+else if (steam is null)
+{
+    <p class="panel-txt">Loading panel...</p>
+}
+else
+{
+    <p class="panel-txt"> @steam.appnews.appid </p>
+}
 
-    protected override async Task OnInitializedAsync() => news = await Steam.GetPostsAsync();
+@code {
+
+
+    @* protected override async Task OnInitializedAsync() => news = await Steam.GetPostsAsync(); *@
+
+    SteamModel steam;
+    string errorString;
+
+    protected override async Task OnInitializedAsync()
+    {
+        //var request = new HttpRequestMessage(HttpMethod.Get, "http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=440&count=3&maxlength=300&format=json");
+
+        //var client = _clientFactory.CreateClient();
+
+        //HttpResponseMessage response = await client.SendAsync(request);
+
+        //if (response.IsSuccessStatusCode)
+        //{
+        //    steam = await response.Content.ReadFromJsonAsync<SteamModel>();
+        //    errorString = null;
+        //}
+        //else
+        //{
+        //    errorString = $"There was an error getting data from steam: {response.ReasonPhrase }";
+        //}
+
+        var client = _clientFactory.CreateClient("steam");
+
+        try
+        {
+            steam = await client.GetFromJsonAsync<SteamModel>("ISteamNews/GetNewsForApp/v0002/?appid=440&count=3&maxlength=300&format=json");
+            errorString = null;
+        }
+        catch (Exception ex)
+        {
+            errorString = $"There was an error getting data from steam: {ex.Message }";
+        }
+    }
 
 }
