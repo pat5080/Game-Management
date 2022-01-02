@@ -1,12 +1,14 @@
 ﻿@page "/panel"
 
 @using NodeEleven.Models.SteamModel;
-@* @using NodeEleven.Services.Steam; *@
+@using NodeEleven.Models.DbModel;
 @using System.Net.Http;
+@using DataLibrary
 
 @inject IHttpClientFactory _clientFactory
+@inject IDataAccess _data
+@inject IConfiguration _config
 
-@* @inject SteamService Steam *@
 
 <PageTitle>Panel</PageTitle>
 
@@ -38,31 +40,36 @@ else
     <p class="panel-txt"> @steam.appnews.appid </p>
 }
 
+@if (games == null)
+{
+    <p class="panel-txt">Loading panel...</p>
+}
+else
+{
+    @foreach (var g in games)
+    {
+        <p class="panel-txt">
+            @g.name
+        </p>
+    }
+}
+
+
+
 @code {
-
-
-    @* protected override async Task OnInitializedAsync() => news = await Steam.GetPostsAsync(); *@
 
     SteamModel steam;
     string errorString;
 
+    List<DbModel> games;
+
+
+
     protected override async Task OnInitializedAsync()
     {
-        //var request = new HttpRequestMessage(HttpMethod.Get, "http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/?appid=440&count=3&maxlength=300&format=json");
+        string sql = "select * from games";
 
-        //var client = _clientFactory.CreateClient();
-
-        //HttpResponseMessage response = await client.SendAsync(request);
-
-        //if (response.IsSuccessStatusCode)
-        //{
-        //    steam = await response.Content.ReadFromJsonAsync<SteamModel>();
-        //    errorString = null;
-        //}
-        //else
-        //{
-        //    errorString = $"There was an error getting data from steam: {response.ReasonPhrase }";
-        //}
+        games = await _data.LoadData<DbModel, dynamic>(sql, new { }, _config.GetConnectionString("default"));
 
         var client = _clientFactory.CreateClient("steam");
 
@@ -76,5 +83,4 @@ else
             errorString = $"There was an error getting data from steam: {ex.Message }";
         }
     }
-
 }

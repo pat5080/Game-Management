@@ -1,3 +1,4 @@
+using DataLibrary;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.Extensions.Configuration;
@@ -17,6 +18,7 @@ builder.Services.AddHttpClient("steam", c =>
 {
     c.BaseAddress = new Uri(uri);
 });
+builder.Services.AddSingleton<IDataAccess, DataAccess>();
 
 var app = builder.Build();
 
